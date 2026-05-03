@@ -2,7 +2,7 @@ import DropDown from './Dropdown';
 import logoSmallImg from '../assets/images/logo-small.svg';
 import iconPersonalBest from '../assets/images/icon-personal-best.svg';
 
-const HeaderStats = () => {
+const HeaderStats = ({time,wpm,accuracy}) => {
     return (
         <div className='flex flex-col gap-6'>
 
@@ -21,20 +21,18 @@ const HeaderStats = () => {
 
                 <div className='px-7 text-xl'>
                     <div className='text-neutral-500'>WPM:</div>
-                    <div className='font-bold'>0</div>
+                    <div className='font-bold'>{wpm}</div>
                 </div>
+
                 <div className='px-7 text-xl'>
                     <div className='text-neutral-500' >Accuracy:</div>
-                    <div className='font-bold'>100%</div>
+                    <div className='font-bold'>{accuracy}</div>
                 </div>
+
                 <div className='px-7 text-xl'>
                     <div className='text-neutral-500'>Time:</div>
-                    <div className='font-bold'>0:60</div>
+                    <div className='font-bold'>{time}</div>
                 </div>
-
-            </div>
-
-            <div>
 
             </div>
 

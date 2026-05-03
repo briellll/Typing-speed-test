@@ -1,5 +1,3 @@
-
-
 const StartScreen = ({onStartTest}) => {
     return (
 
