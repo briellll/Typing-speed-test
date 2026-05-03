@@ -1,4 +1,4 @@
-
+import DropDown from './Dropdown';
 import logoSmallImg from '../assets/images/logo-small.svg';
 import iconPersonalBest from '../assets/images/icon-personal-best.svg';
 
@@ -35,8 +35,20 @@ const HeaderStats = () => {
             </div>
 
             <div>
-                
+
             </div>
+
+            <div className="flex justify-center gap-4 mb-8 ">
+                <DropDown
+                    options={['Easy','Medium','Hard']}
+                    defaultSelected="Hard"
+                />
+                <DropDown
+                    options={['Timed(60s)','Passage']}
+                    defaultSelected="Timed(60s)"
+                />
+            </div>
+
 
         </div>
     )
