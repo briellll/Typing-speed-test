@@ -1,6 +1,8 @@
 import { useState } from "react"
 import HeaderStats from "./components/HeaderStats"
 import StartScreen from "./components/StartScreen"
+import TypingArea from "./components/TypingArea";
+import ResultScreen from "./components/ResultScreen";
 
 function App() {
 
@@ -12,10 +14,18 @@ function App() {
 
             <HeaderStats/>
             <hr className=" border-neutral-500 " />
+
             {gamePhase === 'start' && (
                 <StartScreen onStartTest={() => setGamePhase('playing')} />
             )}
 
+            {gamePhase ==='playing' && (
+                <TypingArea onTimeUp={() =>('finished')} />
+            )}
+
+            {gamePhase ==='finished' && (
+                <ResultScreen onRestart={ () =>('start')} />
+            )}
 
 
         </div>
