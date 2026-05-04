@@ -10,9 +10,39 @@ function App() {
 
     const [wpm,setWpm] = useState(0);
     const [accuracy,setAccuracy] = useState(0);
-    const [timeLeft,setTimeLeft] = useState(5);
+    const [timeLeft,setTimeLeft] = useState(60);
     const [correctChars, setCorrectChars] = useState(0);
     const [incorrectChars, setIncorrectChars] = useState(0);
+
+    const [bestwpm,setBestWpm] = useState(()=>{
+        const savedBest = localStorage.getItem('bestWpm');
+        return savedBest ? parseInt(savedBest, 10) : 0;
+    });
+
+    const [recordType,setRecordType] = useState('none');
+
+    useEffect(()=>{
+        if (gamePhase === 'finished'){
+            const currentBest = localStorage.getItem('bestWpm');
+            const parsedBest = currentBest ? parseInt(currentBest, 10) : 0;
+
+            setTimeout(()=>{
+                if (currentBest === null){
+                localStorage.setItem('bestWpm', wpm.toString());
+                setBestWpm(wpm);
+                setRecordType('baseline');
+            } else if (wpm > parsedBest){
+                localStorage.setItem('bestWpm', wpm.toString());
+                setBestWpm(wpm);
+                setRecordType('smashed');
+            } else {
+                setRecordType('none');
+            }
+
+            },0)
+
+        }
+    }, [gamePhase, wpm]);
 
         useEffect(()=> {
         let intervalId;
@@ -40,7 +70,7 @@ function App() {
         setGamePhase('start');
         setWpm(0);
         setAccuracy(0);
-        setTimeLeft(0);
+        setTimeLeft(60);
         setCorrectChars(0);
         setIncorrectChars(0);
     };
@@ -52,6 +82,10 @@ function App() {
         setIncorrectChars(incorrect);
     }
 
+    const handleTextComplete = () => {
+        setGamePhase('finished');
+    }
+
   return (
     <div className=" bg-neutral-900 min-h-screen p-4 " >
         <div className=" max-w-sm mx-auto ">
@@ -61,6 +95,7 @@ function App() {
                 wpm={wpm}
                 accuracy={accuracy}
                 gamePhase={gamePhase}
+                bestWpm={bestwpm}
             />
 
             {gamePhase !== 'finished' && (
@@ -76,6 +111,7 @@ function App() {
                 onRestart={handleRestart}
                 timeLeft={timeLeft}
                 onUpdateStats={handleUpdateStats}
+                onComplete={handleTextComplete}
                 />
             )}
 
@@ -86,6 +122,7 @@ function App() {
                 onRestart={handleRestart}
                 incorrectChars = {incorrectChars}
                 correctChars = {correctChars}
+                recordType = {recordType}
                 />
             )}
 

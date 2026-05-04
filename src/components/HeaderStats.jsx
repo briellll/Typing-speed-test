@@ -2,7 +2,7 @@ import DropDown from './Dropdown';
 import logoSmallImg from '../assets/images/logo-small.svg';
 import iconPersonalBest from '../assets/images/icon-personal-best.svg';
 
-const HeaderStats = ({time,wpm,accuracy, gamePhase}) => {
+const HeaderStats = ({time,wpm,accuracy, gamePhase, bestWpm}) => {
     return (
         <div className='flex flex-col gap-6'>
 
@@ -12,7 +12,7 @@ const HeaderStats = ({time,wpm,accuracy, gamePhase}) => {
                 <div className='flex items-center gap-1  font-semibold'>
                     <span className='mr-1'><img src={iconPersonalBest} alt="logo de um troféu" /></span>
                     <div className='text-neutral-500'>Best:</div>
-                     <div className=' text-neutral-50 '>92 WPM</div>
+                     <div className=' text-neutral-50 '>{bestWpm}</div>
                 </div>
             </div>
 

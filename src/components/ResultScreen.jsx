@@ -1,20 +1,35 @@
 import iconRestart from '../assets/images/icon-restart.svg';
 import iconCompleted from '../assets/images/icon-completed.svg';
+import iconNewPb from '../assets/images/icon-new-pb.svg';
 
-const ResultScreen = ({wpm, accuracy, correctChars, incorrectChars ,onRestart}) => {
+const ResultScreen = ({wpm, accuracy, correctChars, incorrectChars ,onRestart, recordType}) => {
+
+    let title = 'Teste Completo!';
+    let subtitle = 'Suas mãos são mais rápidas que um Tabaxi Rogue no nível 20!';
+    let iconToRender = iconCompleted;
+
+    if (recordType === 'baseline'){
+        title = 'Recorde base estabelecido !';
+        subtitle = "Voce chegou na base. Agora o desafio real começa"
+    } else if (recordType === 'smashed') {
+        title = "Recorde quebrado !";
+        subtitle = "Rapa tu ta ficando bom ein parabens!";
+        iconToRender = iconNewPb;
+    }
+
     return (
         <div className='flex flex-col mt-8'>
 
             <div className='flex flex-col items-center justify-center gap-6 mt-8    w-full max-w-sm mx-auto'>
                 <div>
-                    <img src={iconCompleted} alt="finalizado" />
+                    <img src={iconToRender} alt="finalizado" />
                 </div>
                 <div className='text-center mb-3 '>
                     <h2 className=' text-2xl font-semibold text-neutral-50 mb-2'>
-                        Teste Completo!
+                        {title}
                     </h2>
                     <p className=' text-sm text-neutral-400 '>
-                        Suas mãos são mais rápidas que um Tabaxi Rogue no nível 20!
+                        {subtitle}
                     </p>
                 </div>
             </div>
