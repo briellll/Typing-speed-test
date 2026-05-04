@@ -1,12 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import iconRestart from "../assets/images/icon-restart.svg"
 
-const TypingArea = ({onRestart}) => {
+const TypingArea = ({onRestart, timeLeft, onUpdateStats}) => {
 
     const referenceText = "The archaeological expedition unearthed artifacts that complicated prevailing theories about Bronze Age trade networks.";
-
     const [userInput,setUserInput] = useState('');
-
     const inputRef = useRef(null);
 
     useEffect(()=>{
@@ -14,6 +12,36 @@ const TypingArea = ({onRestart}) => {
             inputRef.current.focus();
         }
     },[]);
+
+    useEffect(()=>{
+
+        if (userInput === 0) return;
+
+        const timeElapsedInSeconds = 60 - timeLeft;
+        const timeElapsedInMinutes = timeElapsedInSeconds / 60;
+
+        let currentWpm = 0;
+        if (timeElapsedInMinutes > 0) {
+            const wordTyped = userInput.length / 5;
+            currentWpm = Math.round(wordTyped / timeElapsedInMinutes);
+        }
+
+        let correct = 0;
+        let incorrect = 0;
+        for (let i = 0; i < userInput.length; i++){
+            if (userInput[i] === referenceText[i]){
+                correct++;
+            } else {
+                incorrect++;
+            }
+        }
+        const currentAccuracy = userInput.length > 0
+      ? Math.round((correct / userInput.length) * 100)
+      : 100;
+
+        onUpdateStats(currentWpm, currentAccuracy, correct, incorrect);
+
+    },[userInput,timeLeft, onUpdateStats]);
 
     const handleInputChange = (e) => {
 
@@ -63,7 +91,7 @@ const TypingArea = ({onRestart}) => {
             <div className="flex items-center justify-center mt-3">
                 <button onClick={onRestart} className=" flex gap-2 rounded-lg bg-neutral-800 py-2 px-4 text-neutral-50 font-bold items-center hover:bg-neutral-500 transition-colors ">
                     Restart Test
-                    <img src={iconRestart} alt="" />
+                    <img src={iconRestart} alt="icone de restart" />
                 </button>
             </div>
 

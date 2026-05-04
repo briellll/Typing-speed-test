@@ -10,7 +10,9 @@ function App() {
 
     const [wpm,setWpm] = useState(0);
     const [accuracy,setAccuracy] = useState(0);
-    const [timeLeft,setTimeLeft] = useState(60);
+    const [timeLeft,setTimeLeft] = useState(5);
+    const [correctChars, setCorrectChars] = useState(0);
+    const [incorrectChars, setIncorrectChars] = useState(0);
 
         useEffect(()=> {
         let intervalId;
@@ -39,11 +41,15 @@ function App() {
         setWpm(0);
         setAccuracy(0);
         setTimeLeft(0);
+        setCorrectChars(0);
+        setIncorrectChars(0);
     };
 
-    const handleUpdateStats = (newWpm, newAccuracy) => {
+    const handleUpdateStats = (newWpm, newAccuracy, correct, incorrect) => {
         setWpm(newWpm);
         setAccuracy(newAccuracy);
+        setCorrectChars(correct);
+        setIncorrectChars(incorrect);
     }
 
   return (
@@ -54,9 +60,12 @@ function App() {
                 time={timeLeft}
                 wpm={wpm}
                 accuracy={accuracy}
+                gamePhase={gamePhase}
             />
 
-            <hr className=" border-neutral-500 " />
+            {gamePhase !== 'finished' && (
+                <hr className=" border-neutral-500 " />
+            )}
 
             {gamePhase === 'start' && (
                 <StartScreen onStartTest={() => setGamePhase('playing')} />
@@ -71,7 +80,13 @@ function App() {
             )}
 
             {gamePhase ==='finished' && (
-                <ResultScreen tesete={ () => setGamePhase('start')} />
+                <ResultScreen
+                wpm={wpm}
+                accuracy={accuracy}
+                onRestart={handleRestart}
+                incorrectChars = {incorrectChars}
+                correctChars = {correctChars}
+                />
             )}
 
 
