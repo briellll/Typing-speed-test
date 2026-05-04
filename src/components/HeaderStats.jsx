@@ -2,7 +2,7 @@ import DropDown from './Dropdown';
 import logoSmallImg from '../assets/images/logo-small.svg';
 import iconPersonalBest from '../assets/images/icon-personal-best.svg';
 
-const HeaderStats = ({time,wpm,accuracy, gamePhase, bestWpm}) => {
+const HeaderStats = ({time,wpm,accuracy, gamePhase, bestWpm, difficulty, mode, onDifficultyChange, onModeChange}) => {
     return (
         <div className='flex flex-col gap-6'>
 
@@ -40,11 +40,13 @@ const HeaderStats = ({time,wpm,accuracy, gamePhase, bestWpm}) => {
                     <div className="flex justify-center gap-4 mb-8 ">
                         <DropDown
                             options={['Easy','Medium','Hard']}
-                            defaultSelected="Hard"
+                            selectedOption={difficulty}
+                            onOptionSelect={onDifficultyChange}
                         />
                         <DropDown
                             options={['Timed(60s)','Passage']}
-                            defaultSelected="Timed(60s)"
+                            selectedOption={mode}
+                            onOptionSelect={onModeChange}
                         />
                     </div>
                 </>

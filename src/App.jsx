@@ -13,13 +13,24 @@ function App() {
     const [timeLeft,setTimeLeft] = useState(60);
     const [correctChars, setCorrectChars] = useState(0);
     const [incorrectChars, setIncorrectChars] = useState(0);
-
     const [bestwpm,setBestWpm] = useState(()=>{
         const savedBest = localStorage.getItem('bestWpm');
         return savedBest ? parseInt(savedBest, 10) : 0;
     });
-
     const [recordType,setRecordType] = useState('none');
+    const [difficulty, setDifficulty] = useState('Hard');
+    const [mode, setMode] = useState('Timed(60s)');
+
+    const handleDifficultyChange = (newDifficulty) => {
+        setDifficulty(newDifficulty);
+        handleRestart();
+    };
+
+    const handleModeChange = (newMode) => {
+        setMode(newMode);
+        handleRestart();
+    };
+
 
     useEffect(()=>{
         if (gamePhase === 'finished'){
@@ -96,6 +107,10 @@ function App() {
                 accuracy={accuracy}
                 gamePhase={gamePhase}
                 bestWpm={bestwpm}
+                difficulty={difficulty}
+                mode={mode}
+                onDifficultyChange={handleDifficultyChange}
+                onModeChange={handleModeChange}
             />
 
             {gamePhase !== 'finished' && (

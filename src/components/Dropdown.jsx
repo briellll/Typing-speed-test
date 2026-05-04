@@ -1,14 +1,13 @@
 import { useState } from "react";
 import iconDownArrow from "../assets/images/icon-down-arrow.svg";
 
-const DropDown = ({options, defaultSelected}) => {
+const DropDown = ({options, selectedOption, onOptionSelect}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const [selectedOption, setSelectedOption] = useState(defaultSelected);
 
     const handleSelect = (option) => {
-        setSelectedOption(option);
+        onOptionSelect(option);
         setIsOpen(false);
     };
 
