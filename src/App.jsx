@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {useEffect, useState } from "react"
 import HeaderStats from "./components/HeaderStats"
 import StartScreen from "./components/StartScreen"
 import TypingArea from "./components/TypingArea";
@@ -20,6 +20,7 @@ function App() {
     const [recordType,setRecordType] = useState('none');
     const [difficulty, setDifficulty] = useState('Hard');
     const [mode, setMode] = useState('Timed(60s)');
+
 
     const handleDifficultyChange = (newDifficulty) => {
         setDifficulty(newDifficulty);
@@ -58,12 +59,20 @@ function App() {
         useEffect(()=> {
         let intervalId;
 
-        if (gamePhase === 'playing' && timeLeft > 0){
+
+
+        if (gamePhase === 'playing' && timeLeft > 0 && mode === 'Timed(60s)'){
 
             intervalId = setInterval(()=> {
                 setTimeLeft((prevtime)=> prevtime - 1);
             }, 1000);
 
+        }
+
+        else if ( gamePhase === 'playing' && mode === 'Passage'){
+            intervalId = setInterval(()=>{
+                setTimeLeft((prevtime)=> prevtime + 1);
+            },1000);
         }
 
         else if (timeLeft === 0 && gamePhase === 'playing'){
@@ -75,15 +84,23 @@ function App() {
         return () => clearInterval(intervalId);
 
 
-    }, [gamePhase,timeLeft]);
+    }, [gamePhase,timeLeft,mode]);
 
     const handleRestart = () => {
         setGamePhase('start');
         setWpm(0);
         setAccuracy(0);
-        setTimeLeft(60);
+
         setCorrectChars(0);
         setIncorrectChars(0);
+
+        if (mode ==='Timed(60s)') {
+            setTimeLeft(60);
+        }
+
+        else if (mode === 'Passage'){
+            setTimeLeft(0)
+        }
     };
 
     const handleUpdateStats = (newWpm, newAccuracy, correct, incorrect) => {
@@ -96,6 +113,8 @@ function App() {
     const handleTextComplete = () => {
         setGamePhase('finished');
     }
+
+    const timeElapsed = mode === 'Timed(60s)' ? 60 - timeLeft : timeLeft;
 
   return (
     <div className=" bg-neutral-900 min-h-screen p-4 " >
@@ -124,7 +143,7 @@ function App() {
             {gamePhase ==='playing' && (
                 <TypingArea
                 onRestart={handleRestart}
-                timeLeft={timeLeft}
+                timeElapsed={timeElapsed}
                 onUpdateStats={handleUpdateStats}
                 onComplete={handleTextComplete}
                 />

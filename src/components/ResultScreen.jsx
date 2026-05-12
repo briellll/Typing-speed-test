@@ -4,13 +4,13 @@ import iconNewPb from '../assets/images/icon-new-pb.svg';
 
 const ResultScreen = ({wpm, accuracy, correctChars, incorrectChars ,onRestart, recordType}) => {
 
-    let title = 'Teste Completo!';
-    let subtitle = 'Suas mãos são mais rápidas que um Tabaxi Rogue no nível 20!';
+    let title = 'Recorde base estabelecido !';
+    let subtitle = 'Voce chegou na base. Agora o desafio real começa';
     let iconToRender = iconCompleted;
 
-    if (recordType === 'baseline'){
-        title = 'Recorde base estabelecido !';
-        subtitle = "Voce chegou na base. Agora o desafio real começa"
+    if (recordType === 'none'){
+        title = 'Teste Completo!';
+        subtitle = "Foi bom mas ainda nao bateu teu record anterior"
     } else if (recordType === 'smashed') {
         title = "Recorde quebrado !";
         subtitle = "Rapa tu ta ficando bom ein parabens!";

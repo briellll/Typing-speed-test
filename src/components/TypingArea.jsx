@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import iconRestart from "../assets/images/icon-restart.svg"
 
-const TypingArea = ({onRestart, timeLeft, onUpdateStats, onComplete}) => {
+const TypingArea = ({onRestart, timeElapsed, onUpdateStats, onComplete}) => {
 
     const referenceText = "The archaeological expedition unearthed artifacts that complicated prevailing theories about Bronze Age trade networks.";
     const [userInput,setUserInput] = useState('');
@@ -17,8 +17,7 @@ const TypingArea = ({onRestart, timeLeft, onUpdateStats, onComplete}) => {
 
         if (userInput.length === 0) return;
 
-        const timeElapsedInSeconds = 60 - timeLeft;
-        const timeElapsedInMinutes = timeElapsedInSeconds / 60;
+        const timeElapsedInMinutes = timeElapsed / 60;
 
         let currentWpm = 0;
         if (timeElapsedInMinutes > 0) {
@@ -45,7 +44,7 @@ const TypingArea = ({onRestart, timeLeft, onUpdateStats, onComplete}) => {
             onComplete();
         }
 
-    },[userInput,timeLeft, onUpdateStats, onComplete]);
+    },[userInput,timeElapsed, onUpdateStats, onComplete]);
 
     const handleInputChange = (e) => {
 
