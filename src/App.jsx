@@ -29,7 +29,7 @@ function App() {
 
     const handleModeChange = (newMode) => {
         setMode(newMode);
-        handleRestart();
+        handleRestart(newMode);
     };
 
 
@@ -86,19 +86,18 @@ function App() {
 
     }, [gamePhase,timeLeft,mode]);
 
-    const handleRestart = () => {
+    const handleRestart = ( currentMode = mode ) => {
         setGamePhase('start');
         setWpm(0);
         setAccuracy(0);
-
         setCorrectChars(0);
         setIncorrectChars(0);
 
-        if (mode ==='Timed(60s)') {
+        if (currentMode ==='Timed(60s)') {
             setTimeLeft(60);
         }
 
-        else if (mode === 'Passage'){
+        else if (currentMode === 'Passage'){
             setTimeLeft(0)
         }
     };
