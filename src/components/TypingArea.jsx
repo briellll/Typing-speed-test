@@ -44,7 +44,7 @@ const TypingArea = ({onRestart, timeElapsed, onUpdateStats, onComplete, textToTy
             onComplete();
         }
 
-    },[userInput,timeElapsed, onUpdateStats, onComplete]);
+    },[userInput,timeElapsed, onUpdateStats, onComplete, referenceText]);
 
     const handleInputChange = (e) => {
 
