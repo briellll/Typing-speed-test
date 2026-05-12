@@ -1,0 +1,20 @@
+{
+  "Easy": [
+    "O sol brilhou forte hoje de manha e os passarinhos cantaram.",
+    "Beber agua todos os dias faz muito bem para a sua saude.",
+    "O teclado mecanico faz um barulho muito legal quando eu digito.",
+    "Sempre salve o seu progresso antes de desligar o computador."
+  ],
+  "Medium": [
+    "A inteligência artificial está revolucionando a forma como interagimos com a tecnologia.",
+    "Quando o código compila perfeitamente na primeira tentativa, todo programador desconfia.",
+    "O analista de TI precisou reconfigurar o roteador porque o IP estava dando conflito na rede.",
+    "O desenvolvimento front-end exige muita atenção aos detalhes e uma boa arquitetura de componentes."
+  ],
+  "Hard": [
+    "O mago Bladesong conjurou 'Misty Step' (Passo Nebuloso) para desviar do ataque; logo em seguida, engajou com sua lâmina arcana causando 4d8 de dano crítico!",
+    "Segundo as convenções do ECMAScript 6, o uso de 'const' e 'let' mitiga os problemas de hoisting e escopo (lexical) causados pelo obsoleto 'var'.",
+    "A infraestrutura de servidores requer manutenção constante: desde a configuração de redes (TCP/IP) até a resolução de problemas físicos em impressoras e switches.",
+    "O artefato arqueológico, datado da Era do Bronze, revelou que a rota comercial entre a Anatólia (obsidiana) e o Báltico (âmbar) era vasta e extremamente complexa."
+  ]
+}

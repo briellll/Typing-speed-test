@@ -1,4 +1,4 @@
-const StartScreen = ({onStartTest}) => {
+const StartScreen = ({onStartTest, textToType}) => {
     return (
 
 
@@ -7,9 +7,7 @@ const StartScreen = ({onStartTest}) => {
             onClick={onStartTest}>
 
                 <div className="text-2xl leading-relaxed text-neutral-400       opacity-50 select-none  blur-sm ">
-                        The archaeological expedition unearthed artifacts that complicated prevailing
-                        theories about Bronze Age trade networks. Obsidian from Anatolia, lapis lazuli
-                        from Afghanistan, and amber from the Baltic—all found in a single...
+                        {textToType}
                 </div>
 
                 <div className="absolute inset-0 flex flex-col items-center justify-center">

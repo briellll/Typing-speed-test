@@ -3,8 +3,18 @@ import HeaderStats from "./components/HeaderStats"
 import StartScreen from "./components/StartScreen"
 import TypingArea from "./components/TypingArea";
 import ResultScreen from "./components/ResultScreen";
+import textBank from './utils/textBank.json';
+
 
 function App() {
+
+    const getRandomText = (level) =>{
+        const texts = textBank[level];
+        const randomIndex = Math.floor(Math.random() * texts.length);
+        return texts[randomIndex];
+    };
+
+
 
     const [gamePhase, setGamePhase] = useState('start');
 
@@ -20,11 +30,12 @@ function App() {
     const [recordType,setRecordType] = useState('none');
     const [difficulty, setDifficulty] = useState('Hard');
     const [mode, setMode] = useState('Timed(60s)');
+    const [currentText, setCurrentText] = useState(()=> getRandomText('Hard') )
 
 
     const handleDifficultyChange = (newDifficulty) => {
         setDifficulty(newDifficulty);
-        handleRestart();
+        handleRestart(mode, newDifficulty);
     };
 
     const handleModeChange = (newMode) => {
@@ -86,12 +97,14 @@ function App() {
 
     }, [gamePhase,timeLeft,mode]);
 
-    const handleRestart = ( currentMode = mode ) => {
+    const handleRestart = ( currentMode = mode, currentDifficulty = difficulty ) => {
         setGamePhase('start');
         setWpm(0);
         setAccuracy(0);
         setCorrectChars(0);
         setIncorrectChars(0);
+
+        setCurrentText(getRandomText(currentDifficulty));
 
         if (currentMode ==='Timed(60s)') {
             setTimeLeft(60);
@@ -100,6 +113,8 @@ function App() {
         else if (currentMode === 'Passage'){
             setTimeLeft(0)
         }
+
+
     };
 
     const handleUpdateStats = (newWpm, newAccuracy, correct, incorrect) => {
@@ -112,6 +127,7 @@ function App() {
     const handleTextComplete = () => {
         setGamePhase('finished');
     }
+
 
     const timeElapsed = mode === 'Timed(60s)' ? 60 - timeLeft : timeLeft;
 
@@ -136,7 +152,10 @@ function App() {
             )}
 
             {gamePhase === 'start' && (
-                <StartScreen onStartTest={() => setGamePhase('playing')} />
+                <StartScreen
+                onStartTest={() => setGamePhase('playing')}
+                textToType={currentText}
+                />
             )}
 
             {gamePhase ==='playing' && (
@@ -145,6 +164,7 @@ function App() {
                 timeElapsed={timeElapsed}
                 onUpdateStats={handleUpdateStats}
                 onComplete={handleTextComplete}
+                textToType={currentText}
                 />
             )}
 

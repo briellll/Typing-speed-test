@@ -15,7 +15,7 @@ const DropDown = ({options, selectedOption, onOptionSelect}) => {
         <div className=" relative flex-1 w-full ">
 
             <button onClick={()=> setIsOpen(!isOpen)}
-                className=" w-full flex border border-neutral-500 py-2 rounded-lg text-neutral-200 justify-center px-4 items-center gap-3 text-center hover:bg-neutral-800 transition-colors "
+                className=" w-full flex border border-neutral-500 py-2 rounded-lg text-neutral-200 justify-center px-4 items-center gap-3 text-center hover:bg-neutral-800 transition-colors select-none "
                 >
             <span>{selectedOption}</span>
             <span>

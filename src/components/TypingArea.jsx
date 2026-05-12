@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import iconRestart from "../assets/images/icon-restart.svg"
 
-const TypingArea = ({onRestart, timeElapsed, onUpdateStats, onComplete}) => {
+const TypingArea = ({onRestart, timeElapsed, onUpdateStats, onComplete, textToType}) => {
 
-    const referenceText = "The archaeological expedition unearthed artifacts that complicated prevailing theories about Bronze Age trade networks.";
+    const referenceText = textToType;
     const [userInput,setUserInput] = useState('');
     const inputRef = useRef(null);
 
