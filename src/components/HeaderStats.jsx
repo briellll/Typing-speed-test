@@ -17,7 +17,7 @@ const HeaderStats = ({time,wpm,accuracy, gamePhase, bestWpm, difficulty, mode, o
             </div>
 
             {gamePhase !== 'finished' && (
-                <>
+                <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mt-6 '>
                     <div className='flex justify-center text-center gap-3 text-neutral-200 divide-x divide-neutral-800  '>
 
                         <div className='px-7 text-xl'>
@@ -37,7 +37,7 @@ const HeaderStats = ({time,wpm,accuracy, gamePhase, bestWpm, difficulty, mode, o
 
                     </div>
 
-                    <div className="flex justify-center gap-4 mb-8 ">
+                    <div className="flex md:hidden justify-center gap-4 mb-8 ">
                         <DropDown
                             options={['Easy','Medium','Hard']}
                             selectedOption={difficulty}
@@ -49,7 +49,29 @@ const HeaderStats = ({time,wpm,accuracy, gamePhase, bestWpm, difficulty, mode, o
                             onOptionSelect={onModeChange}
                         />
                     </div>
-                </>
+
+                    <div className='hidden md:flex items-center gap-6'>
+                        <span className='text-neutral-500 text-sm '>Dificuldade:</span>
+                        <div className='flex gap-2'>
+                            {['Easy','Medium','Hard'].map((opt)=>(
+                                <button
+                                key={opt}
+                                onClick={() => onDifficultyChange(opt)}
+                                className={`px-3 py-1 rounded-lg border text-sm transition-colors select-none cursor-pointer ${
+                                    difficulty === opt
+                                    ? 'border-blue-500 text-blue-500'
+                                    : 'border-neutral-500 text-neutral-200 hover:border-neutral-300 hover:bg-neutral-800'
+                                }`}
+                                >
+                                    {opt}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+
+
+                </div>
           )}
         </div>
     )

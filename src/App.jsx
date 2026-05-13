@@ -132,8 +132,8 @@ function App() {
     const timeElapsed = mode === 'Timed(60s)' ? 60 - timeLeft : timeLeft;
 
   return (
-    <div className=" bg-neutral-900 min-h-screen p-4 " >
-        <div className=" max-w-sm mx-auto ">
+    <div className=" bg-neutral-900 min-h-screen p-4 w-full flex justify-center " >
+        <div className=" w-full max-w-sm md:max-w-3xl lg:max-w-5xl ">
 
             <HeaderStats
                 time={timeLeft}
