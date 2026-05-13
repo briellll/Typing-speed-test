@@ -62,7 +62,7 @@ function App() {
                 setRecordType('none');
             }
 
-            },0)
+            },0);
 
         }
     }, [gamePhase, wpm]);
